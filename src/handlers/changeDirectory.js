@@ -2,11 +2,11 @@ import { cwd } from "process";
 import path from "path";
 import fs from "fs";
 
-export const changeDirectory = (directoryPath, currentDirectory) => {
+export const changeDirectory = async (directoryPath, currentDirectory) => {
   try {
     const targetPath = path.resolve(currentDirectory, directoryPath);
 
-    const stats = fs.statSync(targetPath);
+    const stats = await fs.promises.stat(targetPath);
     if (!stats.isDirectory()) {
       console.log("Operation failed");
       return currentDirectory;
